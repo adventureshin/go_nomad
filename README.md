@@ -17,9 +17,16 @@
 
 
 4. 함수 출력 여러개
-  - func lenAndUpper(name string) (int, string) { return len(name),
-      strings.ToUpper(name) }
-  - a, _ = lenAndUpper 이렇게 _로 무시할수 있음
+  - func lenAndUpper(name string) (int, string) { return len(name), strings.ToUpper(name) }
+  - a, _ = lenAndUpper 이렇게 나머지 변수를 무시할수 있음
+
 
 5. 함수 입력 여러개
-  - func repeatMe(words ...string) 
+  - func repeatMe(words ...string)
+
+
+6. naked 함수
+  - func lenAndUpper(name string) (length int, uppercase string) {
+      length=len(name)
+      uppercase = string.ToUpper(name)
+      }
