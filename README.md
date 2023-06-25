@@ -37,6 +37,12 @@
 
 
 8. if
-  - if koreanAge := age + 2; koreanAge < 18 {}
+  - if koreanAge := age + 2; koreanAge `<` 18 {}
+
+
+9. switch
+  - switch age {case 10: return false case 18: return true}
+  - switch { case age==10: return false case age==18: return true}
+
 
 
