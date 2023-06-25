@@ -30,3 +30,10 @@
       length=len(name)
       uppercase = string.ToUpper(name)
       }
+
+
+7. defer
+  - defer fmt.Println("I'm done")
+
+
+
