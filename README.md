@@ -70,4 +70,17 @@
     }
 
 
+13. func using pointer
+  - func NewAccount(owner string) *Account {
+      accounts := Account{owner: owner, balance: 0}
+      return &account
+    }
+
+
+14. method
+  - func (a *Account) Deposit(amount int) {
+      a.balance += amount
+    }
+
+
 
