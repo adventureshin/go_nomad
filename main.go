@@ -13,9 +13,12 @@ func main() {
   account.Deposit(10)
   fmt.Println(account)
   fmt.Println(account.Balance())
-  err := account.Withdraw(20)
+  err := account.Withdraw(5)
   if err != nil {
     fmt.Println(err)
     log.Fatalln(err)
   }
+  account.ChangeOwner("lynn")
+  fmt.Println(account)
+  fmt.Println(account.Owner())
 }
