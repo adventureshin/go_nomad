@@ -26,6 +26,8 @@ func main() {
   }
   fmt.Println(dictionary)
   fmt.Println(searchDict("second", dictionary))
+  dictionary.Update("first", "First word update")
+  fmt.Println(dictionary)
 }
 
 

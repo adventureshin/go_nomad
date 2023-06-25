@@ -14,7 +14,7 @@ func (d Dictionary) Search(word string) (string, error) {
   if exists {
     return value, nil
   }
-  return "", errNotFound 
+  return "", errNotFound
 }
 
 // Add adds a word to the dictionary
@@ -25,4 +25,14 @@ func (d Dictionary) Add(word string, definition string) error {
   }
   d[word] = definition
   return nil
+}
+
+// Update updates a word in the dictionary
+func (d Dictionary) Update(word string, definition string) error {
+  _, exists := d[word]
+  if exists {
+    d[word] = definition
+    return nil
+  }
+  return errNotFound
 }
