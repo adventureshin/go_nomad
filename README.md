@@ -50,3 +50,10 @@
   - Array - names := [5]string{"a","b","c"}
   - slice - names := []string{"a", "b", "c"}
   - append - names = append(names, "d")
+
+
+11. map
+  - nico := map[string]string{"name":"nico", "age":"12"}
+
+
+
