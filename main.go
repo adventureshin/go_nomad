@@ -5,18 +5,8 @@ import (
 )
 
 
-func canIDrink(age int) bool {
-  switch age {
-  case 10:
-    return false
-  case 18:
-    return true
-  }
-  return false
-}
-
 func main() {
-  fmt.Println(canIDrink(16))
-  fmt.Println(canIDrink(10))
-  fmt.Println(canIDrink(18))
+  names := []string{"nico", "lynn", "dal"}
+  names = append(names, "flynn")
+  fmt.Println(names)
 }

@@ -7,7 +7,8 @@
 
 
 2. 변수 설정
-  - const, var
+  - const b int = 1
+  - var a string = "Hi"
   - var의 축약형 : name:="lynn" -> 함수 안에서만 사용 가능
 
 
@@ -45,4 +46,7 @@
   - switch { case age==10: return false case age==18: return true}
 
 
-
+10. Array and slice
+  - Array - names := [5]string{"a","b","c"}
+  - slice - names := []string{"a", "b", "c"}
+  - append - names = append(names, "d")
