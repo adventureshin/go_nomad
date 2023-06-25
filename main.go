@@ -2,23 +2,30 @@ package main
 
 import (
   "fmt"
-  "go_nomad/accounts"
+  "go_nomad/dict"
   "log"
 )
 
+func searchDict(word string, d dict.Dictionary) string {
+  find_word, nill := d.Search(word)
+  if nill != nil {
+    log.Fatal(nill)
+  }
+  return find_word
+}
+
 
 func main() {
-  account := accounts.NewAccount("nico")
-  fmt.Println(account)
-  account.Deposit(10)
-  fmt.Println(account)
-  fmt.Println(account.Balance())
-  err := account.Withdraw(5)
+  dictionary := dict.Dictionary{"first": "First word"}
+  fmt.Println(dictionary.Search("first"))
+  fmt.Println(dictionary.Search("second"))
+  fmt.Println(searchDict("first", dictionary))
+  err := dictionary.Add("second", "Second word")
   if err != nil {
-    fmt.Println(err)
-    log.Fatalln(err)
+    log.Fatal(err)
   }
-  account.ChangeOwner("lynn")
-  fmt.Println(account)
-  fmt.Println(account.Owner())
+  fmt.Println(dictionary)
+  fmt.Println(searchDict("second", dictionary))
 }
+
+
