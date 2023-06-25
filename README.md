@@ -56,4 +56,18 @@
   - nico := map[string]string{"name":"nico", "age":"12"}
 
 
+12. structure
+  - type person struct {
+      name string
+      age int
+      facFood []string
+    }
+  - nico := person {"nico", 18, facFood}
+  - nico := person {
+      name: "nico",
+      age: 18,
+      favFood: []string{"kimchi", "ramen"},
+    }
+
+
 
