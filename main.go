@@ -11,4 +11,5 @@ func main() {
   fmt.Println(account)
   account.Deposit(10)
   fmt.Println(account)
+  fmt.Println(account.Balance())
 }
