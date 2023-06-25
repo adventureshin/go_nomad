@@ -36,4 +36,7 @@
   - defer fmt.Println("I'm done")
 
 
+8. if
+  - if koreanAge := age + 2; koreanAge < 18 {}
+
 

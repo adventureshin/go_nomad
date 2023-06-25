@@ -2,18 +2,17 @@ package main
 
 import (
   "fmt"
-  "strings"
 )
 
 
-func lenAndUpper(name string) (length int, uppercase string) {
-  defer fmt.Println("I'm done")
-  length = len(name)
-  uppercase = strings.ToUpper(name)
-  return
+func canIDrink(age int) bool {
+  if koreanAge := age + 2; koreanAge < 18 {
+    return false
+  }
+  return true
 }
 
 func main() {
-  totalLength, upperName := lenAndUpper("nico")
-  fmt.Println(totalLength, upperName)
+  fmt.Println(canIDrink(15))
+  fmt.Println(canIDrink(18))
 }
