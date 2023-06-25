@@ -3,6 +3,7 @@ package main
 import (
   "fmt"
   "go_nomad/accounts"
+  "log"
 )
 
 
@@ -12,4 +13,9 @@ func main() {
   account.Deposit(10)
   fmt.Println(account)
   fmt.Println(account.Balance())
+  err := account.Withdraw(20)
+  if err != nil {
+    fmt.Println(err)
+    log.Fatalln(err)
+  }
 }
