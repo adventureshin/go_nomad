@@ -2,49 +2,32 @@ package main
 
 import (
   "fmt"
-  "net/http"
-  "errors"
+  "time"
 )
 
-var errRequestFailed = errors.New("Request failed")
+type people struct {
+  person string
+  age int
+}
+
 
 func main() {
-  urls := []string{
-    "https://www.airbnb.com/",
-    "https://www.google.com/",
-    "https://www.amazon.com/",
-    "https://www.reddit.com/",
-    "https://www.google.com/",
-    "https://soundcloud.com/",
-    "https://www.facebook.com/",
-    "https://www.instagram.com/",
-    "https://academy.nomadcoders.c/",
+  c := make(chan bool)
+  peopleList := [2]people {}
+  peopleList[0] = people {"nico", 5}
+  peopleList[1] = people {"flynn", 1}
+  for _, person := range peopleList {
+    fmt.Println("start: " + person.person)
+    go isSexy(person.person, person.age, c)
   }
-  var result = make(map[string]string)
-  for _, url := range urls {
-    err := hitURL(url)
-    if err != nil {
-      result[url] = "FAILED"
-    } else {
-      result[url] = "OK"
-    }
-  }
-  var url string
-  var status string
-  for url, status = range result {
-    fmt.Println(url, status)
-  }
+  fmt.Println(<-c)
+  fmt.Println(<-c)
 }
 
-func hitURL(url string) error {
-  fmt.Println("Checking:", url)
-  resp, err := http.Get(url)
-  if err != nil {
-    return errRequestFailed
-  }
-  if resp.StatusCode >= 400 {
-    fmt
-    return errRequestFailed
-  }
-  return nil
+func isSexy(person string, delay int, c chan bool){
+  time.Sleep(time.Second * time.Duration(delay))
+  fmt.Println("send to channel:" + person)
+  c <- true
 }
+
+
