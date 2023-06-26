@@ -12,7 +12,7 @@ type people struct {
 
 
 func main() {
-  c := make(chan bool)
+  c := make(chan string)
   peopleList := [2]people {}
   peopleList[0] = people {"nico", 5}
   peopleList[1] = people {"flynn", 1}
@@ -24,10 +24,10 @@ func main() {
   fmt.Println(<-c)
 }
 
-func isSexy(person string, delay int, c chan bool){
+func isSexy(person string, delay int, c chan string){
   time.Sleep(time.Second * time.Duration(delay))
   fmt.Println("send to channel:" + person)
-  c <- true
+  c <- person + " is Sexy"
 }
 
 

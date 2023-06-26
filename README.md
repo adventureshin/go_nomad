@@ -85,3 +85,11 @@
 
 15. String()
   - String() is function called by Println(account)
+
+
+16. Channel
+  - c := make(chan string)
+  - go isSexy(person, c)
+    result := `<`- c
+  - func isSexy(person string, c chan string){
+    c `<`- persion + " is Sexy"
