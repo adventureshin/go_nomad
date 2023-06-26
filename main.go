@@ -2,34 +2,49 @@ package main
 
 import (
   "fmt"
-  "go_nomad/dict"
-  "log"
+  "net/http"
+  "errors"
 )
 
-func searchDict(word string, d dict.Dictionary) string {
-  find_word, nill := d.Search(word)
-  if nill != nil {
-    log.Fatal(nill)
-  }
-  return find_word
-}
-
+var errRequestFailed = errors.New("Request failed")
 
 func main() {
-  dictionary := dict.Dictionary{"first": "First word"}
-  fmt.Println(dictionary.Search("first"))
-  fmt.Println(dictionary.Search("second"))
-  fmt.Println(searchDict("first", dictionary))
-  err := dictionary.Add("second", "Second word")
-  if err != nil {
-    log.Fatal(err)
+  urls := []string{
+    "https://www.airbnb.com/",
+    "https://www.google.com/",
+    "https://www.amazon.com/",
+    "https://www.reddit.com/",
+    "https://www.google.com/",
+    "https://soundcloud.com/",
+    "https://www.facebook.com/",
+    "https://www.instagram.com/",
+    "https://academy.nomadcoders.c/",
   }
-  fmt.Println(dictionary)
-  fmt.Println(searchDict("second", dictionary))
-  dictionary.Update("first", "First word update")
-  fmt.Println(dictionary)
-  dictionary.Delete("second")
-  fmt.Println(dictionary)
+  var result = make(map[string]string)
+  for _, url := range urls {
+    err := hitURL(url)
+    if err != nil {
+      result[url] = "FAILED"
+    } else {
+      result[url] = "OK"
+    }
+  }
+  var url string
+  var status string
+  for url, status = range result {
+    fmt.Println(url, status)
+  }
 }
 
-
+func hitURL(url string) error {
+  fmt.Println("Checking:", url)
+  resp, err := http.Get(url)
+  if err != nil {
+    return errRequestFailed
+  }
+  if resp.StatusCode >= 400 {
+    fmt
+    return errRequestFailed
+  }
+  return nil
+}
