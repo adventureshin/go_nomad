@@ -36,3 +36,13 @@ func (d Dictionary) Update(word string, definition string) error {
   }
   return errNotFound
 }
+
+// Delete deletes a word from the dictionary
+func (d Dictionary) Delete(word string) error {
+  _, exists := d[word]
+  if exists {
+    delete(d, word)
+       return nil
+  }
+  return errNotFound
+}

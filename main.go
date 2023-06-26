@@ -28,6 +28,8 @@ func main() {
   fmt.Println(searchDict("second", dictionary))
   dictionary.Update("first", "First word update")
   fmt.Println(dictionary)
+  dictionary.Delete("second")
+  fmt.Println(dictionary)
 }
 
 
