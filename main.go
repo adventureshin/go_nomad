@@ -1,50 +1,47 @@
 package main
 
 import (
-  "fmt"
-  "net/http"
-  "errors"
+	"fmt"
+	"net/http"
 )
 
-var errRequestFailed = errors.New("Request failed")
-
-func main() {
-  urls := []string{
-    "https://www.airbnb.com/",
-    "https://www.google.com/",
-    "https://www.amazon.com/",
-    "https://www.reddit.com/",
-    "https://www.google.com/",
-    "https://soundcloud.com/",
-    "https://www.facebook.com/",
-    "https://www.instagram.com/",
-    "https://academy.nomadcoders.co/",
-  }
-  cErr := make(chan error)
-  var result = make(map[string]string)
-  for _, url := range urls {
-    go hitUrl(url, cErr)
-  }
-  for _, url := range urls {
-    err := <- cErr
-    if err != nil {
-      result[url] = "FAILED"
-    } else {
-      result[url] = "OK"
-    }
-  }
-  for url, status := range result {
-    fmt.Println(url + ": " + status)
-  }
+type requestResult struct {
+	url string
+	status string
 }
 
-func hitUrl(url string, cErr chan error) {
-  fmt.Println("Checking:", url)
-  resp, err := http.Get(url)
-  if err != nil {
-    cErr <- errRequestFailed
-  } else if resp.StatusCode >= 400 {
-    cErr <- errRequestFailed
-  }
-  cErr <- nil
+func main() {
+	results := make(map[string]string)
+	c := make(chan requestResult)
+	urls := []string{
+		"https://www.airbnb.com/",
+		"https://www.google.com/",
+		"https://www.amazon.com/",
+		"https://www.reddis.com/",
+		"https://www.google.com/",
+		"https://soundcloud.com/",
+		"https://www.facebook.com/",
+		"https://www.instagram.com/",
+		"https://academy.nomadcoders.co/",
+	}
+	for _, url := range urls {
+		go hitURL(url, c)
+	}
+	var new_result requestResult
+	for i:=0; i<len(urls); i++ {
+		new_result= <-c
+		results[new_result.url] = new_result.status
+	}
+	for url, status := range results{
+		fmt.Println(url + status)
+	}
+}
+
+func hitURL(url string, c chan<- requestResult) {
+	res, err := http.Get(url)
+	if err != nil || res.StatusCode >=400 {
+		c <- requestResult{url:url, status: "Failed"}
+	} else {
+		c <- requestResult{url:url, status: "Ok"}
+	}
 }
